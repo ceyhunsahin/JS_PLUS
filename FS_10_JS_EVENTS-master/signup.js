@@ -274,7 +274,13 @@ console.log("navbarSignupLi =>>>>",navbarSignupLi);
 
 
 
+//const myArr = Array.from('hello');
+//console.log(myArr);
 
+const firstname = "ceyhun";
+
+const arr = firstname.split('');
+console.log(arr);
 
 
 
