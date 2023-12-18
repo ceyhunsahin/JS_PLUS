@@ -1,4 +1,4 @@
-console.log("say hello");
+/* console.log("say hello");
 
 let id = setTimeout(function() {
     console.log("say hello from timeout");
@@ -8,12 +8,12 @@ console.log("Say Hello Again");
 
 console.log(id);
 
-clearTimeout(id) // setTimeout'a islem yaptirmadi burada
+clearTimeout(id) // setTimeout'a islem yaptirmadi burada */
 
 
 //? An EXAMPLE
 
-const slowTask = () => {
+/* const slowTask = () => {
     let i = 0 ;
     let result = {firstName: 'Ceyhun',  lastName : 'SAHIN'};
     do {
@@ -30,10 +30,10 @@ setTimeout( () => {
 },5000);  // ms kismi 0 veya yoksa ne zaman vakti bulursan gazla demek
 
 console.log("...3");
-console.log("...4");
+console.log("...4"); */
 
 // wait function
-/* function wait(ms) {
+function wait(ms) {
     const start = new Date().getTime();
     let end = start;
     while(end< start+ ms){
@@ -41,8 +41,8 @@ console.log("...4");
     };
     
 }
-wait(4000) */
-
+//wait(4000)
+/* 
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -53,8 +53,8 @@ function wait(ms) {
     await wait(3000); // 3 saniye bekler
     console.log('3 saniye geçti!');
   }
-  
-  exampleFunction();
+   */
+/*   exampleFunction(); */
 
   // Consol'un time ozellikleri
 
@@ -103,7 +103,7 @@ function wait(ms) {
         "renk": "Kırmızı"
     }
 ]
-let carOzellik = document.querySelector('#ozellikler')
+/* let carOzellik = document.querySelector('#ozellikler')
 console.log(carOzellik);
 
 let seconds = 11
@@ -120,7 +120,7 @@ function showTime() {
 
 };
 
-let display = setInterval(showTime,1000);
+let display = setInterval(showTime,1000); */
 
 
 
@@ -143,7 +143,7 @@ function hello(){
 
 
 
-new Promise(function(resolve, reject) {
+/* new Promise(function(resolve, reject) {
     setTimeout(() => resolve(1), 1000); // bir değer ile resolve çağrılır
   })
   .then(function(result) { // ilk .then
@@ -157,4 +157,101 @@ new Promise(function(resolve, reject) {
   .then(function(result) { // üçüncü .then
     console.log(result); // 4
     return result * 2;
-  });
+  }); */
+
+/* const promise = new Promise((resolve, reject) => {
+    // request --> req
+    // response --> res
+    // some calculation
+    const data = "some results";
+    const success = true;
+    if (success) {
+        resolve(data)
+    };
+    reject(new Error('Some Error Occured'))
+
+    wait(1000);
+    const userData = {
+        firstName : 'Ceyhun',
+        birthDay: 1977
+    };
+    let successful = Math.floor(Math.random() * 2);
+    if (successful) resolve(userData);
+    reject(new Error('Stg went wrong'));
+
+})
+
+promise.then((result) => {
+
+            return 'Selam';
+        }).then(r => r)
+        .catch(error => {console.log(error)}
+             )
+        .finally(console.log('finally islem tamamlandi'));
+ */
+
+
+/* fetch('https://api.example.com/data')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json(); // JSON dönüşümü için bir Promise döndürür
+  })
+  .then(data => {
+    console.log(data); // Elde edilen veri
+  })
+  .catch(error => {
+    console.error('Fetch error:', error); // Hata durumunda çalışır
+  }); 
+ */
+
+
+const cayDemle = () => {
+    suyuKaynat ()
+    .then((durum1) => {
+        console.log('durum1 =>',durum1);
+        return cayEkle() 
+    })
+    .then((durum2) => {
+        wait(3000);
+        console.log('durum2 =>',durum2);
+        return afiyet()
+    })
+    .then((durum3) =>
+        console.log('durum3 =>', durum3))
+    .catch((err) => {
+        console.log(err);
+    })    
+}
+
+const suyuKaynat = () => {
+    return new Promise ((resolve, reject) => {
+        const nasip = Math.floor(Math.random()*5);
+        if (nasip) {
+            return resolve('Su Kaynadi')
+        }
+        reject('Kettle Arizali')
+    })
+}
+
+const cayEkle = () => {
+    return new Promise ((resolve, reject) => {
+        const cayNasibi = Math.floor(Math.random()*3); 
+        if (cayNasibi) {
+            resolve('Cay Eklendi')
+        }
+        reject('Cay Bitmis')
+    })
+}
+
+const afiyet = () => {
+    wait(2000);
+    return 'cay Hazir Afiyet olsun'
+}
+
+cayDemle()
+
+
+
+
