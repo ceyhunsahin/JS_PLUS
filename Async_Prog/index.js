@@ -58,10 +58,103 @@ function wait(ms) {
 
   // Consol'un time ozellikleri
 
-  console.time('time elapsed');
+/*   console.time('time elapsed');
   console.log("hello");
   wait(1500);
   console.timeLog('time elapsed');
   console.log('world');
   console.warn("this message is printed after 1.5 sn seconds")
-  console.timeEnd("time elapsed")
+  console.timeEnd("time elapsed") */
+
+  const carExpression = [
+    {
+        "id": 1,
+        "marka": "Volvo",
+        "model": "XC90",
+        "yıl": 2020,
+        "renk": "Mavi"
+    },
+    {
+        "id": 2,
+        "marka": "Mercedes",
+        "model": "Benz C-Class",
+        "yıl": 2021,
+        "renk": "Siyah"
+    },
+    {
+        "id": 3,
+        "marka": "BMW",
+        "model": "3 Series",
+        "yıl": 2019,
+        "renk": "Beyaz"
+    },
+    {
+        "id": 4,
+        "marka": "Audi",
+        "model": "A4",
+        "yıl": 2022,
+        "renk": "Gri"
+    },
+    {
+        "id": 5,
+        "marka": "Saab",
+        "model": "Model S",
+        "yıl": 2023,
+        "renk": "Kırmızı"
+    }
+]
+let carOzellik = document.querySelector('#ozellikler')
+console.log(carOzellik);
+
+let seconds = 11
+function showTime() {
+    let dateTime = new Date();
+    let time = dateTime.toLocaleTimeString();
+    seconds--;
+    carOzellik.innerText = seconds;
+
+    if (seconds === 0) {
+        carOzellik.innerText = "Time is over";
+        clearInterval(display)
+    };
+
+};
+
+let display = setInterval(showTime,1000);
+
+
+
+//let car = document.querySelector('#cars')
+
+
+
+// SETTIMEOUT'u 1 kere calissin istedigimiz isler icin kullaniyoruz.
+//? SETINTERVAL
+
+function hello(){
+    console.log("hello ceyhun");
+}
+
+//setInterval(hello, 2000)
+
+
+
+//? PROMISE KONUSU
+
+
+
+new Promise(function(resolve, reject) {
+    setTimeout(() => resolve(1), 1000); // bir değer ile resolve çağrılır
+  })
+  .then(function(result) { // ilk .then
+    console.log(result); // 1
+    return result * 2;
+  })
+  .then(function(result) { // ikinci .then
+    console.log(result); // 2
+    return result * 2;
+  })
+  .then(function(result) { // üçüncü .then
+    console.log(result); // 4
+    return result * 2;
+  });
