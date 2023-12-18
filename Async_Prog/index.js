@@ -237,7 +237,7 @@ const suyuKaynat = () => {
 
 const cayEkle = () => {
     return new Promise ((resolve, reject) => {
-        const cayNasibi = Math.floor(Math.random()*3); 
+        const cayNasibi = Math.floor(Math.random()*10); 
         if (cayNasibi) {
             resolve('Cay Eklendi')
         }
@@ -250,7 +250,51 @@ const afiyet = () => {
     return 'cay Hazir Afiyet olsun'
 }
 
-cayDemle()
+//cayDemle()
+
+//? ASYNC ... AWAIT
+
+
+async function fetchData() {
+    try {
+      // Bir asenkron isteği bekler
+      const response = await fetch('https://dummyjson.com/users');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json(); // JSON dönüşümünü bekler
+      console.log(data); // Elde edilen veriyi gösterir
+    } catch (error) {
+      // Hataları yakalar
+      console.error('Fetch error:', error);
+    }
+  }
+  
+fetchData();
+
+
+const func1 = async () => {
+    wait(2000);
+    return 'Async function is resolved'
+}
+//console.log(func1())
+
+
+const cayDemle2 = async () => {
+    try {
+    const durum1 = await suyuKaynat();
+    console.log(durum1);
+    const durum2 = await cayEkle();
+    console.log(durum2);
+    const durum3 = await afiyet();
+    console.log(durum3);
+    } catch (err) {
+        console.log(err);
+    }
+
+}
+
+cayDemle2()
 
 
 
