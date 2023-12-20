@@ -1,5 +1,7 @@
 url = 'https://restcountries.com/v3.1/all';
-/* let globalData;
+url2 = 'https://restcountries.com/v3.1/alpha'
+url3 = 'https://restcountries.com/v3.1/name'
+let globalData;
 const ulkeInfo = async () => {
     try {
         const countries = await fetch(url);
@@ -68,7 +70,35 @@ const renderCountries = (i) => {
                 </div>
             </div>`
 }
- */
+
 
 // her bir sekilde await etmeye calis
 
+
+const getNeighbour = async (countryCode) => {
+
+    const response = await fetch (`${url2}/${countryCode}`);
+    const data = await response.json()
+    return data[0]; 
+
+}
+
+
+
+const getCountry = async (countryName) => {
+
+    const response = await fetch (`${url3}/${countryName}`);
+    const data = await response.json()
+    //return data [0]; 
+
+    if (data[0].borders) {
+        // bir bilgiden digerlerine ulasiyoruz, harika bir yontem
+        for await (const item of data[0].borders){
+            const neighbor = await getNeighbour(item)
+            console.log(neighbor);
+        }
+    }
+
+}
+
+getCountry('Turkey')
