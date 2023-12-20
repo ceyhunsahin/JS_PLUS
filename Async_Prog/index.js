@@ -255,22 +255,7 @@ const afiyet = () => {
 //? ASYNC ... AWAIT
 
 
-async function fetchData() {
-    try {
-      // Bir asenkron isteği bekler
-      const response = await fetch('https://dummyjson.com/users');
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      const data = await response.json(); // JSON dönüşümünü bekler
-      console.log(data); // Elde edilen veriyi gösterir
-    } catch (error) {
-      // Hataları yakalar
-      console.error('Fetch error:', error);
-    }
-  }
-  
-fetchData();
+
 
 
 const func1 = async () => {
@@ -296,6 +281,132 @@ const cayDemle2 = async () => {
 
 cayDemle2()
 
+// FETCH ()
+
+const fetchData = async () => {
+    try {
+      // Bir asenkron isteği bekler
+      const response = await fetch('https://dummyjson.com/users');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json(); // JSON dönüşümünü bekler
+      console.log(data); // Elde edilen veriyi gösterir
+    } catch (error) {
+      // Hataları yakalar
+      console.error('Fetch error:', error);
+    }
+  }
+
+//fetchData();
+const url = 'https://jsonplaceholder.org/users/8'
+/* fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  }) 
+  .then(users => {
+    console.log('users',users[0].firstname);
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  }); */
+
+ 
+ /* function usingFetch (url) {
+    fetch(url)
+  .then(response => {
+    console.log(response);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  }) 
+  .then(users => {
+    console.log('users',users);
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
+ } 
+usingFetch(url) */
 
 
+const usingAsyncFetching = async () => {
+    try {
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error ('Something Wrong')
+        }
+        const userData = await res.json();
+        
 
+        return userData; // en onemli kisim burasi return etmek
+        
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+// elde edilen veriyi kullanma 
+//1.kullanim
+usingAsyncFetching().then(data => {
+    for ([key, value] of Object.entries(data)) {
+        console.log(key, '::==>>', value);
+    }; // Elde edilen veriyi kullanma
+    const { address : {zipcode : zipCode} } = data
+    console.log('zipCode', zipCode);
+  });
+// daha yavas hali
+const f1 = async () => {
+const sonuc = await usingAsyncFetching(url);
+console.log('sonuc',sonuc);
+}
+
+f1()
+
+// tum dosyayi kullanma, bu sekilde modul haline getirilir
+
+// en basa (async () => {
+ // tum js dosyasi 
+// en sona }).() koyabilirim
+
+
+const url2 = 'https://jsonplaceholder.typicode.com/todos'
+
+const todos = async () => {
+  try {
+    const res = await fetch(url2);
+    if (!res.ok) {
+      throw new Error ('Something Wrong')
+  }
+    const data = await res.json();
+    return data
+  
+  } catch(err) {
+    console.log('gives error');
+  };
+};
+
+todos().then (res => {
+  let x = res.map(item => item.title)
+  x = x.slice(0,10)
+
+  let pageCars = document.querySelector('#cars');
+  
+
+  let pageCeyhun = document.querySelector('#ozellikler');
+  console.log('pageCars',pageCars);
+  pageCars.addEventListener('change', () => {
+    [...pageCars].forEach ((item) =>{
+      if (item.selected === true) {
+        pageCeyhun.innerHTML = `<li>${item.value} </li>`
+      }
+      else {item.selected} ;
+      //
+    })
+
+  })
+})
