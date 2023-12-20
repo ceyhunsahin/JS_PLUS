@@ -36,9 +36,25 @@ ulkeInfo().then( data => {
         };
     });
 
-    ulkeOptions.addEventListener('change', () => {
-        const selectedValue = ulkeOptions.value
+    ulkeOptions.addEventListener('change', (e) => {
+        const selectedValue = e.target.value
         //console.log(selectedValue);
+        const getCountry = async (countryName) => {
+
+            const response = await fetch (`${url3}/${selectedValue}`);
+            const data = await response.json()
+            //return data [0]; 
+        
+            if (data[0].borders) {
+                // bir bilgiden digerlerine ulasiyoruz, harika bir yontem
+                for await (const item of data[0].borders){
+                    const neighbor = await getNeighbour(item)
+                    console.log(neighbor);
+                    detayInfo.innerHTML += renderCountries(neighbor)
+                }
+            }
+        
+        }
         data.map((i, index) => {
             if (selectedValue === i.name.common){
 
@@ -47,6 +63,7 @@ ulkeInfo().then( data => {
                 return selectedValue
             };
         });
+        getCountry(selectedValue)
 
        
     })
@@ -84,21 +101,3 @@ const getNeighbour = async (countryCode) => {
 }
 
 
-
-const getCountry = async (countryName) => {
-
-    const response = await fetch (`${url3}/${countryName}`);
-    const data = await response.json()
-    //return data [0]; 
-
-    if (data[0].borders) {
-        // bir bilgiden digerlerine ulasiyoruz, harika bir yontem
-        for await (const item of data[0].borders){
-            const neighbor = await getNeighbour(item)
-            console.log(neighbor);
-        }
-    }
-
-}
-
-getCountry('Turkey')

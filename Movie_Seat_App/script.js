@@ -17,6 +17,8 @@ const movieSelectBox = document.getElementById('movie');
  let selectedMovieIndexFromStorage = localStorage.getItem('selectedMovieIndex');
  let currentMovieIndex = selectedMovieIndexFromStorage ? selectedMovieIndexFromStorage : selectedMovieIndexFromSelectBox;
 // Initialize functions
+
+
 window.onload = () => {
 
    //refresh sonrası son seçili filmin selectbox a eklenmesi
@@ -93,4 +95,3 @@ const displayUI = () => {
   }
   
 }
-
