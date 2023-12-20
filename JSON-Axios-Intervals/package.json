@@ -1,15 +1,12 @@
 {
   "name": "axios",
-  "type" : "module",
+  "type": "module",
   "version": "1.0.0",
-  "description": "",
+  "description": "axios first working",
   "main": "signup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^1.6.2"
-  }
+  "author": "ceyhun",
+  "license": "ISC"
 }
