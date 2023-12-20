@@ -142,7 +142,7 @@
   }
   
   .nav__item {
-    margin-left: 3rem;
+    margin-left: 1rem;
   }
   
   .nav__link:link,
@@ -1313,4 +1313,23 @@ input {
   .card-4 .card-body {
     padding: 50px 40px;
   }
+}
+
+
+#table{
+  padding: 1em; 
+  background: #c6d2d4;
+  display: table;
+  padding: 50px 40px;
+  margin-top: 10px;
+  width : 100%
+}
+
+#table2 { 
+    display: flex;
+    justify-content: space-around;
+    align-items:stretch
+  
+
+  
 }
