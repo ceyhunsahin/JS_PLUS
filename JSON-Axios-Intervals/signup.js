@@ -1,11 +1,4 @@
-const url = 'https://reqres.in/api/users?page=1';
-/* axios.get(url)
-        .then(res => {
-            console.log(res.data[0]);
-                
-            })
-        .catch( err => console.log(err)) */
-
+/* const url = 'https://reqres.in/api/users?page=1';
 
 //? ONCELIKLE GET ISLEMI
 const tabloYeri = document.getElementById('table');
@@ -23,7 +16,7 @@ const getApiUserList = () => {
     tabloYeri.innerHTML = firstLine
     const insideTable = document.querySelector('#table2  tbody:last-child')
     axios.get(url).then(res => {
-        const person = res.data.data;
+        const person = res.data.data; // ilginc bir yontem oluyor destruction daha iyi
         
         [...person].forEach(item => {
 
@@ -81,7 +74,13 @@ const firstLine = `
 const newgetApiUserList = async () => {
 
     try {
-        const resp = await axios(url)
+        //const resp = await axios(url) 1.metot
+        const resp = await axios ({
+            url : url,
+            metot : "  get"
+            //method : 'post',
+            //data : bodyData
+        })
         const {data : userListArray } = resp.data
         console.log('yeni usul', userListArray);
 
@@ -105,4 +104,68 @@ const newgetApiUserList = async () => {
 
 }
 
-newgetApiUserList()
+newgetApiUserList() */
+
+
+//? POST ISLEMI
+
+const mail = document.querySelector("#email");
+const password = document.querySelector("#password");
+const sbmtButton = document.querySelector("#submit");
+
+
+window.addEventListener('load', ()=> {
+
+    mail.value = "eve.holt@reqres.in";
+    password.value = "pistol";
+})
+
+sbmtButton.addEventListener('click', (e)=> {
+    postCustomerRegister();
+});
+
+const postCustomerRegister = async () => {
+   // alert("Customer data send")
+   const bodyData = {
+        "email" : mail.value,
+        "password" : password.value
+   };
+
+   try {
+    showLoading();
+    const response = await axios ({
+        url : "https://reqres.in/api/register",
+        method : 'post',
+        data : bodyData
+        
+    })
+    removeLoading()
+    const { data : userData } = response
+    //const userData  = response.data
+    console.log(userData );
+    if (userData.token == undefined) {
+        alert( "undefined");
+        removeLoading()
+    }
+    else {
+        localStorage.setItem("baseUrl",
+        EncryptStringAES("https://reqres.in/api/register"));
+        localStorage.setItem("apiKey", 
+        EncryptStringAES(userData.token));
+        removeLoading();
+        // subenin kullanicilari kendi musterilerini gormek istiyorsa
+        window.location.href = "userList.html" // sayfa ok ise bunu donmeli
+        // Cok onemli !!!!!!!!!!!!!
+
+    }
+
+   } catch (err) {
+    alert(err);
+    removeLoading()
+   }
+
+
+
+
+
+}
