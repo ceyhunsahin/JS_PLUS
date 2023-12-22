@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+</head>
+<body>
+    <div>
+        <div>
+            <navbar>
+                <div class="navbar nav navbar-fixed-top navbar-inverse">
+                  <div class="container-fluid">
+                   
+                      <div class="navbar-body">
+                        <div class="search">
+                          <input type="text" id = "search" class="search-textbox" placeholder="Search" >
+
+                        </div>
+                      </div>
+                    
+                  </div>
+                </div>
+                <!--2 navbar for pushing 1 above after scrolling (Not Implemented yet.)-->
+              </navbar>
+        </div>
+        <div>
+           
+            <div class="container">
+                <div class="row">
+                    <div id = "cards" class="col">
+
+                        <div class="weather-card one">
+                            <div class="top">
+                                <div class="wrapper">
+                                    <h1 class="heading">Clear night</h1>
+                                    <h3 id = 'location' class="location">Dhaka, Bangladesh</h3>
+                                    <p class="temp">
+                                        <span class="temp-value">20</span>
+                                        <span class="deg">0</span>
+                                        <a href="javascript:;"><span class="temp-type">C</span></a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <div class="wrapper">
+                                    <ul class="forecast">
+                                        <a href="javascript:;"><span class="lnr lnr-chevron-up go-up"></span></a>
+                                        <li class="active">
+                                            <span  class="date">Sunrise</span>
+                                            <span class="lnr lnr-sun condition">
+                                                <span id  = "sunrise"class="temp">23</span>
+                                            </span>
+                                        </li>
+                                        <li class="active">
+                                            <span  class="date">Sunset</span>
+                                            <span class="lnr lnr-sun condition">
+                                                <span id  = "sunset" class="temp">23</span>
+                                            </span>
+                                        </li>
+                    
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script defer src="src/app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+</body>
+</html>
