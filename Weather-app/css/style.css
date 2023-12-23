@@ -6,14 +6,14 @@ body {
   font-family: 'Montserrat', sans-serif;
   background: #112233;
 }
-.container {
+.col {
   display: flex;
   display: -webkit-flex;
-  flex-direction: column;
-  justify-content: center;
-  -webkit-justify-content: center;
-  align-items: center;
-  -webkit-align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: flex-start;
+  -webkit-align-items: space-between;
   overflow-x: hidden;
 }
 

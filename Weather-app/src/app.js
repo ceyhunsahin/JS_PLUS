@@ -13,8 +13,14 @@ const loc = document.getElementsByClassName('location');
 const tempValue = document.getElementsByClassName("temp-value");
 const sunset = document.querySelector("#sunset");
 const sunrise = document.querySelector("#sunrise");
+const cards = document.querySelector("#cards");
 const weatherCard = document.getElementsByClassName("top");
 console.log(weatherCard[0].style.background );
+
+window.addEventListener('load', () => {
+    // Sayfa yüklendiğinde localStorage'ı temizle
+    localStorage.clear();
+});
 
 
 searchCity.addEventListener('keydown', (e) => {
@@ -46,37 +52,53 @@ const weatherInformation = async (q) => {
         console.log(JSON.parse(cityEnters)); */
         let cityEnterName = JSON.parse(localStorage.getItem('cityEnterName') || '[]');
 
-        if (!cityEnterName.includes(resp)) {
+        let cityEnterData = JSON.parse(localStorage.getItem('cityEnterData') || '[]');
+
+        
+
+        if (!cityEnterData.includes(resp.name)) {
             cityEnterName.push(resp);
+            cityEnterData.push(resp.name);
             localStorage.setItem('cityEnterName', JSON.stringify(cityEnterName));
+            localStorage.setItem('cityEnterData', JSON.stringify(cityEnterData));
+
+            console.log('cityEnterName',cityEnterName);
+            console.log('cityEnterData',cityEnterData);
+            console.log('resp', resp);
             
 
         }
+        else {
+            alert('bu sehri daha once sectiniz')
+        }
 
-        console.log('cityEnterName;',cityEnterName);
-        CardFullfill(resp);
 
-        cityEnterName.forEach((temp) => {
+        if ((cityEnterName.length >=2) && (cityEnterName.length < 4)) {
 
-            console.log("temp",temp);
 
-            const cardHTML = CardFullfill(temp);
-            const cardElement = document.createElement('div');
-            cardElement.innerHTML = cardHTML;
-            cards.appendChild(cardElement.firstChild);
+            cityEnterName.slice(-1).forEach((temp) => {
 
-            /* 
-            document.getElementsById("cards").appendChild(template); */
 
-        })
+            console.log('temp', temp);
+
+            const card = createCard(temp);
+    
+            console.log("card ",card );
+    
+            cards.appendChild(card);
+
+
+
+            })}
+             else  if (cityEnterName.length ==1){
+                CardFullfill(resp);
+
+            }
 
     } catch(error) {
         alert ('Aradiginiz bir sehir degildir, Lutfen tekrar deneyiniz');
     }
-
-    
-    
-    
+  
     
 }
 
@@ -127,17 +149,26 @@ function CardFullfill(resp) {
 
     sunset.innerText  = unixZamaniniSaatVeDakikayaCevir(resp.sys.sunset);
 
-    
+}
+
+function createCard(resp) {
+    // Mevcut kartı klonla
+    const template = document.querySelector('.weather-card').cloneNode(true);
+
     // Klonlanan kartın içeriğini güncelle
-    template.querySelector('.heading').textContent = data.heading;
-    template.querySelector('.location').textContent = data.location;
-    template.querySelector('.temp-value').textContent = data.tempValue;
-        // Diğer özellikler de benzer şekilde güncellenebilir
-    
-        // Eşsiz ID'ler atayın veya ID'leri kaldırın
-    template.querySelector('#location').id = 'location-' + index;
-    template.querySelector('#sunrise').id = 'sunrise-' + index;
-    template.querySelector('#sunset').id = 'sunset-' + index;
-    
+    template.querySelector('.heading').textContent = resp.weather[0].description.charAt(0).toUpperCase()+resp.weather[0].description.slice(1,100);
+    template.querySelector('.location').textContent =  resp.name;
+    template.querySelector('.temp-value').textContent = (resp.main.temp - 273.15).toFixed(0);
+
+    template.querySelector("#sunrise").innerText  = unixZamaniniSaatVeDakikayaCevir(resp.sys.sunrise);
+
+    template.querySelector("#sunset").innerText   = unixZamaniniSaatVeDakikayaCevir(resp.sys.sunset);
+    // Diğer özellikler de benzer şekilde güncellenebilir
+
+    // Eşsiz ID'ler atayın veya ID'leri kaldırın
+    template.querySelector('#location').id = '';
+    template.querySelector('#sunrise').id = '';
+    template.querySelector('#sunset').id = '';
+
     return template;
 }
