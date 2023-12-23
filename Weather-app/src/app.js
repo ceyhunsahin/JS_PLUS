@@ -83,17 +83,23 @@ const weatherInformation = async (q) => {
 
             const card = createCard(temp);
     
-            console.log("card ",card );
+            
     
             cards.appendChild(card);
+
+            console.log("cards ",cards );
 
 
 
             })}
-             else  if (cityEnterName.length ==1){
+             else if (cityEnterName.length ==1){
                 CardFullfill(resp);
 
-            }
+            } /* else {
+
+                cards.children[1] = createCard(cityEnterName.slice(-1));
+
+            } */
 
     } catch(error) {
         alert ('Aradiginiz bir sehir degildir, Lutfen tekrar deneyiniz');
